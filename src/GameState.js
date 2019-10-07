@@ -8,6 +8,11 @@ class Card {
   }
 }
 
+const PickUpChoice = {
+  deck: "Deck",
+  discarded: "Discarded"
+};
+
 const Suit = {
   hearts: "hearts",
   spades: "spades",
@@ -183,3 +188,4 @@ class GameState {
 exports.GameState = GameState;
 exports.Card = Card;
 exports.Suit = Suit;
+exports.PickUpChoice = PickUpChoice;
