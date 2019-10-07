@@ -5,8 +5,8 @@ const chalk = require('chalk');
 const PickUpChoice = require("./GameState").PickUpChoice;
 
 class Player {
-  static getPickUpChoice(lastDiscarded, playerCards, aiCards) {
-    Player.displayGameState(lastDiscarded, playerCards, aiCards);
+  static getPickUpChoice(lastDiscarded, playerCards, aiCards, aiPickUpChoice, aiCardPickedUp, aiCardReplaced) {
+    Player.displayGameState(lastDiscarded, playerCards, aiCards, aiPickUpChoice, aiCardPickedUp, aiCardReplaced);
     return inquirer
       .prompt([
         {
@@ -47,9 +47,11 @@ class Player {
     return choices;
   }
 
-  static displayGameState(lastDiscarded, playerCards, aiCards) {
+  static displayGameState(lastDiscarded, playerCards, aiCards, aiPickUpChoice, aiCardPickedUp, aiCardReplaced) {
     clear();
     Player.displayPlayerCards(playerCards, aiCards);
+    Player.printAIMoves(aiPickUpChoice, aiCardPickedUp, aiCardReplaced);
+    console.log("\n");
     console.log(chalk.gray("Discarded Pile"));
     console.log(Player.formatCard(lastDiscarded));
     console.log("\n");
@@ -63,7 +65,6 @@ class Player {
     console.log("\n");
     console.log(chalk.gray("AI's Cards"));
     console.log(player2Table);
-    console.log("\n");
   }
 
   static getTableFromCards(cards) {
@@ -101,7 +102,7 @@ class Player {
   }
 
   static formatCard(card) {
-    if (!card.isFaceUp) return "--------";
+    if (!card.isFaceUp) return "----";
     const suitToEmojiMap = {
       hearts: "❤️",
       spades: "♠️",
@@ -112,11 +113,32 @@ class Player {
   }
 
   static formatCardNum(num) {
-    if (num === 1) return "Ace";
-    if (num === 11) return "Jack";
-    if (num === 12) return "Queen";
-    if (num === 13) return "King";
+    if (num === 1) return "A";
+    if (num === 11) return "J";
+    if (num === 12) return "Q";
+    if (num === 13) return "K";
     return num;
+  }
+
+  static printAIMoves(aiPickUpChoice, aiCardPickedUp, aiCardReplaced) {
+    if (!aiPickUpChoice) return;
+
+    if (!aiCardReplaced) {
+      console.log(chalk.red(
+        "AI picked up " +
+        Player.formatCard(aiCardPickedUp) +
+        " from " +
+        aiPickUpChoice +
+        " and discarded it.\n"));
+    } else {
+      console.log(chalk.red(
+        "AI picked up " +
+        Player.formatCard(aiCardPickedUp) +
+        " from " +
+        aiPickUpChoice +
+        " and replaced " +
+        Player.formatCard(aiCardReplaced) + "."));
+    }
   }
 }
 

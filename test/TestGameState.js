@@ -56,8 +56,6 @@ describe('Unit tests for GameState functions', function () {
     ];
 
     const score = GameState.computeScore(cards);
-    score.should.equal(5+10+10);
+    score.should.equal(5 + 10 + 10);
   });
 });
-
-

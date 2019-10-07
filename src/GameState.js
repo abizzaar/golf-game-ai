@@ -82,6 +82,10 @@ class GameState {
     shuffle(this.deck);
   }
 
+  pickup(pickUpChoice) {
+    return pickUpChoice === PickUpChoice.deck ? this.pickUpFromDeck() : this.pickUpFromDiscard();
+  }
+
   pickUpFromDeck() {
     this.cardPickedUp = this.deck.pop();
     this.cardPickedUp.isFaceUp = true;
@@ -120,7 +124,8 @@ class GameState {
   isGameEnd() {
     const isEnd = this.rounds >= 18 ||
       GameState.isAllCardsFaceUp(this.player1Cards) ||
-      GameState.isAllCardsFaceUp(this.player2Cards);
+      GameState.isAllCardsFaceUp(this.player2Cards) ||
+      this.deck.length === 0;
 
     if (!isEnd) return false;
     else {
