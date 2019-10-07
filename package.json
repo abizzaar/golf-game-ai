@@ -1,0 +1,31 @@
+{
+  "name": "golf-game-ai",
+  "version": "1.0.0",
+  "description": "Engineering challenge for KPCB Fellowship",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "./node_modules/mocha/bin/mocha --recursive --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abizzaar/golf-game-ai.git"
+  },
+  "author": "Abizar Bagasrawala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abizzaar/golf-game-ai/issues"
+  },
+  "homepage": "https://github.com/abizzaar/golf-game-ai#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.1"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "clear": "^0.1.0",
+    "inquirer": "^7.0.0",
+    "knuth-shuffle": "^1.0.8",
+    "text-table": "^0.2.0"
+  }
+}
